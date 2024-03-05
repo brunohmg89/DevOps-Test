@@ -1,0 +1,24 @@
+name: Push to GCR GitHub Action
+on: [push]
+jobs:
+  build-and-push-to-gcr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:      
+      - uses: actions/checkout@v3
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/123123123/locations/global/workloadIdentityPools/the-workload-pool/providers/the-provider
+          service_account: gcr-build@eminent-yen-317712.iam.gserviceaccount.com
+      - uses: RafikFarhad/push-to-gcr-github-action@v5-rc1
+        with:
+          registry: gcr.io
+          project_id: eminent-yen-317712
+          image_name: app_node
+          image_tag: latest,v1
+          dockerfile: .Dockerfile
+          context: ./docker
