@@ -8,3 +8,4 @@ Realização de um teste para vaga de DevOps
 ![image1](img/image1.png)
 - Inicio da criação de um workflow no GitHub (Action) para teste da app. 
 ![image2](img/image2.png)
+- Criado step para build da imagem e envio para o dockerhub.
